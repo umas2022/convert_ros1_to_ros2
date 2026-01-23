@@ -83,6 +83,20 @@ def convert_urdf_to_xacro(ros1_package_path, ros2_package_path):
         print("No URDF directory found in ROS1 package")
         return
     
+    # Get package name from package.xml
+    package_name = os.path.basename(ros2_package_path)
+    package_xml_path = os.path.join(ros2_package_path, 'package.xml')
+    
+    if os.path.exists(package_xml_path):
+        try:
+            tree = ET.parse(package_xml_path)
+            root = tree.getroot()
+            name_element = root.find('name')
+            if name_element is not None and name_element.text:
+                package_name = name_element.text
+        except:
+            pass  # Use directory name if parsing fails
+    
     for urdf_file in os.listdir(ros1_urdf_path):
         if urdf_file.endswith('.urdf'):
             print(f"Converting URDF file: {urdf_file}")
@@ -95,33 +109,52 @@ def convert_urdf_to_xacro(ros1_package_path, ros2_package_path):
             with open(src_urdf, 'r') as f:
                 urdf_content = f.read()
             
-            # Convert mesh paths to separate collision and visual paths
-            # This is a simplified approach - in practice, you might want to do proper XML parsing
+            # Create the base package path to replace
+            original_package_path = ''
+            # Extract package name from original URDF content
+            import re
+            package_matches = re.findall(r'package://([^/]+)/', urdf_content)
+            if package_matches:
+                original_package_path = package_matches[0]
+            else:
+                # If no package name found, try to infer from directory
+                original_package_path = os.path.basename(ros1_package_path)
+            
+            # First, replace all mesh paths with visual paths
             xacro_content = urdf_content.replace(
-                'package://leader_3215_description/meshes/',
-                'package://leader_3215_description/meshes/visual/'
+                f'package://{original_package_path}/meshes/',
+                f'package://{package_name}/meshes/visual/'
             )
             
-            # For collision meshes, we need to duplicate the geometry sections
-            # This is a simplified approach - a full implementation would require proper XML parsing
+            # Now, replace visual paths with collision paths in collision blocks
+            # This requires proper XML-aware processing to avoid changing visual paths outside collision blocks
             lines = xacro_content.split('\n')
             new_lines = []
             in_collision_block = False
             
             for line in lines:
-                new_lines.append(line)
-                if '<collision>' in line:
+                modified_line = line
+                if '<collision>' in line and '</collision>' not in line:
+                    # Start of collision block
                     in_collision_block = True
+                    new_lines.append(modified_line)
                 elif '</collision>' in line:
+                    # End of collision block
                     in_collision_block = False
+                    new_lines.append(modified_line)
+                elif '<collision' in line and '>' in line and not in_collision_block:
+                    # Self-closing collision tag
+                    new_lines.append(modified_line)
                 elif in_collision_block and 'filename="package://' in line:
-                    # Replace visual path with collision path in collision blocks
-                    line = line.replace(
-                        'package://leader_3215_description/meshes/visual/',
-                        'package://leader_3215_description/meshes/collision/'
+                    # Inside collision block, replace visual path with collision path
+                    modified_line = line.replace(
+                        f'package://{package_name}/meshes/visual/',
+                        f'package://{package_name}/meshes/collision/'
                     )
-                    # Replace the last added line with the corrected one
-                    new_lines[-1] = line
+                    new_lines.append(modified_line)
+                else:
+                    # Outside collision block, keep as is
+                    new_lines.append(modified_line)
             
             xacro_content = '\n'.join(new_lines)
             
@@ -151,10 +184,10 @@ def convert_package_xml(ros1_package_path, ros2_package_path):
     # Add XML model header
     # Note: ElementTree doesn't preserve processing instructions, so we'll add them when writing
     
-    # Update buildtool_depend from catkin to ament_python
+    # Update buildtool_depend from catkin to ament_cmake
     for buildtool in root.findall('buildtool_depend'):
         if buildtool.text == 'catkin':
-            buildtool.text = 'ament_cmake_python'
+            buildtool.text = 'ament_cmake'
     
     # Update dependencies for ROS2
     # Remove roslaunch dependency
@@ -166,6 +199,11 @@ def convert_package_xml(ros1_package_path, ros2_package_path):
     for depend in root.findall('depend'):
         if depend.text == 'gazebo':
             depend.text = 'gazebo_ros'
+    
+    # Update rviz dependency to rviz2
+    for depend in root.findall('depend'):
+        if depend.text == 'rviz':
+            depend.text = 'rviz2'
     
     # Add build_depend and exec_depend for launch_ros
     build_depend = ET.SubElement(root, 'build_depend')
@@ -192,13 +230,16 @@ def convert_package_xml(ros1_package_path, ros2_package_path):
 
 def create_default_package_xml(ros2_package_path):
     """Create a default ROS2 package.xml file."""
-    package_xml_content = '''<?xml version="1.0"?>
+    # Get package name from directory name
+    package_name = os.path.basename(ros2_package_path)
+    
+    package_xml_content = f'''<?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>leader_3215_description</name>
+  <name>{package_name}</name>
   <version>0.1.0</version>
-  <description>leader_3215_description</description>
-  <maintainer email="leader_3215_description@umas.com">leader_3215_description</maintainer>
+  <description>{package_name}</description>
+  <maintainer email="{package_name}@umas.com">{package_name}</maintainer>
   <license>none</license>
 
   <depend>urdf</depend>
@@ -281,10 +322,26 @@ def create_setup_cfg(ros2_package_path):
     """Create setup.cfg for ROS2 package."""
     print("Creating setup.cfg")
     
-    setup_cfg_content = '''[develop]
-script_dir=$base/lib/leader_3215_description
+    # Get package name from directory name initially
+    package_name = os.path.basename(ros2_package_path)
+    
+    # Check if package.xml exists and get the actual package name from it
+    package_xml_path = os.path.join(ros2_package_path, 'package.xml')
+    
+    if os.path.exists(package_xml_path):
+        try:
+            tree = ET.parse(package_xml_path)
+            root = tree.getroot()
+            name_element = root.find('name')
+            if name_element is not None and name_element.text:
+                package_name = name_element.text
+        except:
+            pass  # Use directory name if parsing fails
+    
+    setup_cfg_content = f'''[develop]
+script_dir=$base/lib/{package_name}
 [install]
-install_scripts=$base/lib/leader_3215_description
+install_scripts=$base/lib/{package_name}
 '''
     
     setup_cfg_path = os.path.join(ros2_package_path, 'setup.cfg')
@@ -451,11 +508,31 @@ def convert_launch_files(ros1_package_path, ros2_package_path):
     
     # Create a single ROS2 launch.py file instead of converting each .launch file
     ros2_launch_file = os.path.join(ros2_launch_path, 'launch.py')
-    create_ros2_launch_file(ros2_launch_file)
+    
+    # Get package name from package.xml
+    package_name = os.path.basename(ros2_package_path)
+    package_xml_path = os.path.join(ros2_package_path, 'package.xml')
+    
+    if os.path.exists(package_xml_path):
+        try:
+            tree = ET.parse(package_xml_path)
+            root = tree.getroot()
+            name_element = root.find('name')
+            if name_element is not None and name_element.text:
+                package_name = name_element.text
+        except:
+            pass  # Use directory name if parsing fails
+    
+    create_ros2_launch_file(ros2_launch_file, package_name=package_name)
 
-def create_ros2_launch_file(ros2_launch_file):
+def create_ros2_launch_file(ros2_launch_file, package_name=None):
     """Create a ROS2 launch.py file based on the template."""
-    template_launch_content = '''import os
+    # Get package name from the launch file path if not provided
+    if package_name is None:
+        package_dir_name = os.path.dirname(os.path.dirname(ros2_launch_file))  # Get parent of launch dir
+        package_name = os.path.basename(package_dir_name)
+    
+    template_launch_content = f'''import os
 
 from ament_index_python.packages import get_package_share_directory
 
@@ -470,7 +547,7 @@ from launch.substitutions import Command
 
 def generate_launch_description():
     # Get the launch directory
-    package_dir = get_package_share_directory('leader_3215_description')
+    package_dir = get_package_share_directory('{package_name}')
 
     # Launch configuration variables specific to simulation
     rviz_config_file = LaunchConfiguration('rviz_config_file')
@@ -499,7 +576,7 @@ def generate_launch_description():
 
     declare_urdf_cmd = DeclareLaunchArgument(
         'urdf_file',
-        default_value=os.path.join(package_dir, 'urdf', 'leader_3215_description.xacro'),
+        default_value=os.path.join(package_dir, 'urdf', '{package_name}.xacro'),
         description='Name of the used URDF file')
 
     declare_xacro_cmd = DeclareLaunchArgument(
@@ -519,9 +596,9 @@ def generate_launch_description():
         executable='robot_state_publisher',
         name='robot_state_publisher',
         output='screen',
-        # parameters=[{'use_sim_time': use_sim_time}],
-        parameters=[{
-            'robot_description': robot_description}])
+        # parameters=[{{'use_sim_time': use_sim_time}}],
+        parameters=[{{
+            'robot_description': robot_description}}])
 
     start_joint_state_publisher_cmd = Node(
         condition=IfCondition(use_joint_state_pub),
@@ -563,10 +640,8 @@ def generate_launch_description():
 if __name__ == '__main__':
     # Parse command line arguments
     parser = argparse.ArgumentParser(description='Convert a ROS1 package to ROS2 format')
-    parser.add_argument('--ros1-path', type=str, default='ros1/leader_3215_description',
-                        help='Path to the ROS1 package (default: ros1/leader_3215_description)')
-    parser.add_argument('--ros2-path', type=str, default='ros2_converted/leader_3215_description',
-                        help='Path for the output ROS2 package (default: ros2_converted/leader_3215_description)')
+    parser.add_argument('--ros1-path', type=str, default='example/bp001/ros1/bp001_description')
+    parser.add_argument('--ros2-path', type=str, default='example/bp001/ros2/bp001_description')
     
     args = parser.parse_args()
     

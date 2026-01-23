@@ -1,0 +1,116 @@
+[0.227s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.228s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=12, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7803f5f16f50>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7803f6044430>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7803f6044430>>)
+[0.415s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.416s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.416s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.416s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.416s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.417s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.417s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2'
+[0.418s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.418s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.419s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.419s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.420s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.420s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.420s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.420s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.420s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.432s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.432s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.433s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.433s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.433s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.436s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extensions ['ignore', 'ignore_ament_install']
+[0.436s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extension 'ignore'
+[0.437s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extension 'ignore_ament_install'
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extensions ['colcon_pkg']
+[0.439s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extension 'colcon_pkg'
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extensions ['colcon_meta']
+[0.440s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extension 'colcon_meta'
+[0.441s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extensions ['ros']
+[0.441s] Level 1:colcon.colcon_core.package_identification:_identify(bp001_description) by extension 'ros'
+[0.453s] DEBUG:colcon.colcon_core.package_identification:Package 'bp001_description' with type 'ros.ament_python' and name 'bp001_description'
+[0.456s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.456s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.457s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.459s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.460s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.461s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.465s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.466s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.466s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.467s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.467s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.467s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.467s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.491s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.491s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.494s] WARNING:colcon.colcon_ros.prefix_path.ament:The path '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description' in the environment variable AMENT_PREFIX_PATH doesn't exist
+[0.505s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 0 installed packages in /mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install
+[0.507s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 275 installed packages in /opt/ros/humble
+[0.510s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'cmake_args' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'cmake_target' from command line to 'None'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.556s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'cmake_clean_cache' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'cmake_clean_first' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'cmake_force_configure' from command line to 'False'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'ament_cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'catkin_cmake_args' from command line to 'None'
+[0.557s] Level 5:colcon.colcon_core.verb:set package 'bp001_description' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.558s] DEBUG:colcon.colcon_core.verb:Building package 'bp001_description' with the following arguments: {'ament_cmake_args': None, 'build_base': '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description', 'merge_install': False, 'path': '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/bp001_description', 'symlink_install': False, 'test_result_base': None}
+[0.558s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.559s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.559s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/bp001_description' with build type 'ament_python'
+[0.560s] Level 1:colcon.colcon_core.shell:create_environment_hook('bp001_description', 'ament_prefix_path')
+[0.562s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.562s] INFO:colcon.colcon_core.shell:Creating environment hook '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/hook/ament_prefix_path.ps1'
+[0.582s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/hook/ament_prefix_path.dsv'
+[0.596s] INFO:colcon.colcon_core.shell:Creating environment hook '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/hook/ament_prefix_path.sh'
+[0.621s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.622s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.969s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/bp001_description'
+[0.970s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.970s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.136s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/bp001_description': PYTHONPATH=/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/bp001_description build --build-base /mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description/build install --record /mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description/install.log --single-version-externally-managed install_data
+[3.854s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/bp001_description' returned '0': PYTHONPATH=/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/bp001_description build --build-base /mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description/build install --record /mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/build/bp001_description/install.log --single-version-externally-managed install_data
+[3.856s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description' for CMake module files
+[3.903s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description' for CMake config files
+[3.993s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/lib'
+[3.997s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/bin'
+[3.998s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/lib/pkgconfig/bp001_description.pc'
+[4.000s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/lib/python3.10/site-packages'
+[4.003s] Level 1:colcon.colcon_core.shell:create_environment_hook('bp001_description', 'pythonpath')
+[4.004s] INFO:colcon.colcon_core.shell:Creating environment hook '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/hook/pythonpath.ps1'
+[4.018s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/hook/pythonpath.dsv'
+[4.032s] INFO:colcon.colcon_core.shell:Creating environment hook '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/hook/pythonpath.sh'
+[4.047s] Level 1:colcon.colcon_core.environment:checking '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/bin'
+[4.048s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(bp001_description)
+[4.049s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/package.ps1'
+[4.061s] INFO:colcon.colcon_core.shell:Creating package descriptor '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/package.dsv'
+[4.074s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/package.sh'
+[4.087s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/package.bash'
+[4.100s] INFO:colcon.colcon_core.shell:Creating package script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/bp001_description/package.zsh'
+[4.113s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/bp001_description/share/colcon-core/packages/bp001_description)
+[4.124s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[4.125s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[4.125s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[4.125s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[4.198s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[4.198s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[4.198s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[4.198s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[4.199s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.FileNotFound: Failed to connect to socket /run/user/1000/bus: No such file or directory
+[4.199s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[4.199s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/local_setup.ps1'
+[4.206s] INFO:colcon.colcon_core.shell:Creating prefix util module '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/_local_setup_util_ps1.py'
+[4.212s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/setup.ps1'
+[4.226s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/local_setup.sh'
+[4.231s] INFO:colcon.colcon_core.shell:Creating prefix util module '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/_local_setup_util_sh.py'
+[4.237s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/setup.sh'
+[4.251s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/local_setup.bash'
+[4.257s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/setup.bash'
+[4.271s] INFO:colcon.colcon_core.shell:Creating prefix script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/local_setup.zsh'
+[4.277s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/mnt/c/Users/umas_local/Documents/user/ws_local/ws_code/self/convert_ros1_to_ros2/example/bp001/ros2/install/setup.zsh'

@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="aiot7dof_a03u01_description">
+  <link
+    name="base">
+    <inertial>
+      <origin
+        xyz="-0.119 1.559E-15 0.0091554"
+        rpy="0 0 0" />
+      <mass
+        value="1.412" />
+      <inertia
+        ixx="0.012416"
+        ixy="3.7704E-16"
+        ixz="0.0013447"
+        iyy="0.039962"
+        iyz="-9.9236E-17"
+        izz="0.05177" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/base.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/base.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="link1">
+    <inertial>
+      <origin
+        xyz="2.2204E-16 4.0347E-18 0.024394"
+        rpy="0 0 0" />
+      <mass
+        value="0.098795" />
+      <inertia
+        ixx="9.499E-05"
+        ixy="-8.4065E-19"
+        ixz="-1.5015E-19"
+        iyy="3.2489E-05"
+        iyz="-1.9898E-20"
+        izz="8.0333E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint1"
+    type="revolute">
+    <origin
+      xyz="-0.26 0 0.0635"
+      rpy="0 0 0" />
+    <parent
+      link="base" />
+    <child
+      link="link1" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link2">
+    <inertial>
+      <origin
+        xyz="-0.084 0.015 8.743E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.30213" />
+      <inertia
+        ixx="7.8011E-05"
+        ixy="1.4559E-17"
+        ixz="1.0682E-17"
+        iyy="0.0011292"
+        iyz="3.8085E-21"
+        izz="0.0010965" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint2"
+    type="revolute">
+    <origin
+      xyz="0 -0.015 0.0385"
+      rpy="0 0 0" />
+    <parent
+      link="link1" />
+    <child
+      link="link2" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link3">
+    <inertial>
+      <origin
+        xyz="0.060627 0.025 0.043204"
+        rpy="0 0 0" />
+      <mass
+        value="0.25277" />
+      <inertia
+        ixx="0.00012211"
+        ixy="1.3111E-17"
+        ixz="-0.00010108"
+        iyy="0.0010645"
+        iyz="1.3E-18"
+        izz="0.0010237" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint3"
+    type="revolute">
+    <origin
+      xyz="-0.168 -0.01 0"
+      rpy="0 0 0" />
+    <parent
+      link="link2" />
+    <child
+      link="link3" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link4">
+    <inertial>
+      <origin
+        xyz="0.0075573 -1.9322E-16 0.025439"
+        rpy="0 0 0" />
+      <mass
+        value="0.060158" />
+      <inertia
+        ixx="1.322E-05"
+        ixy="8.2869E-20"
+        ixz="-1.7099E-06"
+        iyy="1.8957E-05"
+        iyz="3.3566E-20"
+        izz="1.6506E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint4"
+    type="revolute">
+    <origin
+      xyz="0.172 0.025 0.0648"
+      rpy="0 0 0" />
+    <parent
+      link="link3" />
+    <child
+      link="link4" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link5">
+    <inertial>
+      <origin
+        xyz="0.0075573 -0.025439 -1.6653E-16"
+        rpy="0 0 0" />
+      <mass
+        value="0.060158" />
+      <inertia
+        ixx="1.322E-05"
+        ixy="1.7099E-06"
+        ixz="6.8212E-20"
+        iyy="1.6506E-05"
+        iyz="-2.6999E-20"
+        izz="1.8957E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link5.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link5.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint5"
+    type="revolute">
+    <origin
+      xyz="0.0212 -0.017 0.0292"
+      rpy="0 0 0" />
+    <parent
+      link="link4" />
+    <child
+      link="link5" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="link6">
+    <inertial>
+      <origin
+        xyz="-1.1102E-16 0.010488 -0.025526"
+        rpy="0 0 0" />
+      <mass
+        value="0.17644" />
+      <inertia
+        ixx="0.00016034"
+        ixy="-1.3441E-18"
+        ixz="-2.9602E-19"
+        iyy="8.515E-05"
+        iyz="-2.5029E-05"
+        izz="0.00016495" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link6.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/link6.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint6"
+    type="revolute">
+    <origin
+      xyz="0.0212 -0.0292 -0.017"
+      rpy="0 0 0" />
+    <parent
+      link="link5" />
+    <child
+      link="link6" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="gripper_left">
+    <inertial>
+      <origin
+        xyz="0.0051487 -0.024 -0.04486"
+        rpy="0 0 0" />
+      <mass
+        value="0.067219" />
+      <inertia
+        ixx="6.821E-05"
+        ixy="-7.7868E-20"
+        ixz="7.8176E-06"
+        iyy="4.9436E-05"
+        iyz="-3.7483E-19"
+        izz="2.9403E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/gripper_left.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/gripper_left.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_gl"
+    type="revolute">
+    <origin
+      xyz="-0.021 0.024 -0.041"
+      rpy="0 0 0" />
+    <parent
+      link="link6" />
+    <child
+      link="gripper_left" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+  <link
+    name="gripper_right">
+    <inertial>
+      <origin
+        xyz="-0.0051487 -0.024 -0.04486"
+        rpy="0 0 0" />
+      <mass
+        value="0.067219" />
+      <inertia
+        ixx="6.821E-05"
+        ixy="-4.5944E-20"
+        ixz="-7.8176E-06"
+        iyy="4.9436E-05"
+        iyz="2.5233E-19"
+        izz="2.9403E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/gripper_right.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://aiot7dof_a03u01_description/meshes/gripper_right.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="joint_gr"
+    type="revolute">
+    <origin
+      xyz="0.021 0.024 -0.041"
+      rpy="0 0 0" />
+    <parent
+      link="link6" />
+    <child
+      link="gripper_right" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-3.1416"
+      upper="3.1416"
+      effort="0"
+      velocity="0" />
+  </joint>
+</robot>

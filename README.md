@@ -38,6 +38,7 @@ Run the conversion script:
 
 ```bash
 python convert_ros1_to_ros2.py
+python .\convert_ros1_to_ros2.py --ros1-path [path1] --ros2-path [path2]
 ```
 
 The script will convert the ROS1 package located at `ros1/leader_3215_description` to a ROS2 package at `ros2_converted/leader_3215_description`.

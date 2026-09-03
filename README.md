@@ -1,6 +1,6 @@
 # ROS1 to ROS2 Package Converter
 
-This script converts a ROS1 robot description package to a ROS2 package format based on the structure of the `leader_3215_description` packages.
+This script converts a ROS1 robot description package to a ROS2 package format based on the structure of the `./example/leader_3215_description` packages.
 
 ## Features
 
@@ -41,16 +41,35 @@ python convert_ros1_to_ros2.py
 python .\convert_ros1_to_ros2.py --ros1-path [path1] --ros2-path [path2]
 ```
 
-The script will convert the ROS1 package located at `ros1/leader_3215_description` to a ROS2 package at `ros2_converted/leader_3215_description`.
+Single package conversion:
+
+```bash
+python .\convert_ros1_to_ros2.py --ros1-path C:\path\to\ros1\my_robot_description --ros2-path C:\path\to\ros2\my_robot_description
+```
+
+Batch conversion from a ROS1 workspace directory containing multiple description packages:
+
+```bash
+python .\convert_ros1_to_ros2.py --ros1-path C:\path\to\ros1 --ros2-path C:\path\to\ros2
+```
+
+For example, if `ros1` contains six `*_description` package directories, the command above creates:
+
+```text
+ros2/
+├── package_a_description/
+├── package_b_description/
+└── ...
+```
+
+If `--ros2-path` is omitted and `--ros1-path` points to a directory named `ros1`, the script writes to the sibling directory named `ros2`.
 
 ## Customization
 
-To convert different packages, modify the paths in the `if __name__ == '__main__':` section of the script:
+To convert different packages, pass paths on the command line:
 
-```python
-# Define paths
-ros1_package_path = 'path/to/your/ros1/package'
-ros2_package_path = 'path/to/your/output/ros2/package'
+```bash
+python .\convert_ros1_to_ros2.py --ros1-path path\to\your\ros1\package --ros2-path path\to\your\output\ros2\package
 ```
 
 ## Package Structure

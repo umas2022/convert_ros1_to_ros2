@@ -6,6 +6,77 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 import argparse
 
+
+def is_ros1_package_dir(path):
+    """Return True if path looks like a ROS1 package directory."""
+    path = Path(path)
+    return (
+        path.is_dir()
+        and (
+            (path / 'package.xml').is_file()
+            or (path / 'urdf').is_dir()
+            or (path / 'meshes').is_dir()
+        )
+    )
+
+
+def find_ros1_package_dirs(ros1_root_path):
+    """Find direct child directories that look like ROS1 packages."""
+    ros1_root = Path(ros1_root_path)
+    if not ros1_root.is_dir():
+        raise FileNotFoundError(f"ROS1 path does not exist or is not a directory: {ros1_root}")
+
+    return sorted(
+        [child for child in ros1_root.iterdir() if is_ros1_package_dir(child)],
+        key=lambda p: p.name.lower()
+    )
+
+
+def infer_ros2_path(ros1_path):
+    """
+    Infer an output path when --ros2-path is omitted.
+
+    If the input path is named "ros1", place output in the sibling "ros2"
+    directory. Otherwise use "<input_parent>/ros2/<input_name>".
+    """
+    ros1_path = Path(ros1_path)
+    if ros1_path.name.lower() == 'ros1':
+        return str(ros1_path.parent / 'ros2')
+    return str(ros1_path.parent / 'ros2' / ros1_path.name)
+
+
+def convert_ros1_path(ros1_path, ros2_path):
+    """
+    Convert either one ROS1 package or all direct package directories under a root.
+
+    Args:
+        ros1_path (str): ROS1 package path, or directory containing ROS1 packages
+        ros2_path (str): ROS2 package path for single conversion, or ROS2 root for batch conversion
+    """
+    ros1_path = Path(ros1_path)
+    ros2_path = Path(ros2_path)
+
+    if is_ros1_package_dir(ros1_path):
+        convert_ros1_to_ros2(str(ros1_path), str(ros2_path))
+        return [ros2_path]
+
+    package_dirs = find_ros1_package_dirs(ros1_path)
+    if not package_dirs:
+        raise ValueError(
+            f"No ROS1 packages found in {ros1_path}. "
+            "Expected package.xml, urdf, or meshes in the directory or its direct children."
+        )
+
+    converted_paths = []
+    print(f"Batch mode: found {len(package_dirs)} ROS1 package(s) under {ros1_path}")
+    for package_dir in package_dirs:
+        output_package_path = ros2_path / package_dir.name
+        print(f"\n=== Converting {package_dir.name} ===")
+        convert_ros1_to_ros2(str(package_dir), str(output_package_path))
+        converted_paths.append(output_package_path)
+
+    return converted_paths
+
 def convert_ros1_to_ros2(ros1_package_path, ros2_package_path):
     """
     Convert a ROS1 package to a ROS2 package based on the structure of leader_3215_description.
@@ -184,10 +255,10 @@ def convert_package_xml(ros1_package_path, ros2_package_path):
     # Add XML model header
     # Note: ElementTree doesn't preserve processing instructions, so we'll add them when writing
     
-    # Update buildtool_depend from catkin to ament_cmake
+    # This converter generates setup.py packages, so use ament_python.
     for buildtool in root.findall('buildtool_depend'):
         if buildtool.text == 'catkin':
-            buildtool.text = 'ament_cmake'
+            buildtool.text = 'ament_python'
     
     # Update dependencies for ROS2
     # Remove roslaunch dependency
@@ -242,6 +313,7 @@ def create_default_package_xml(ros2_package_path):
   <maintainer email="{package_name}@umas.com">{package_name}</maintainer>
   <license>none</license>
 
+  <buildtool_depend>ament_python</buildtool_depend>
   <depend>urdf</depend>
   <build_depend>launch_ros</build_depend>
   <exec_depend>launch_ros</exec_depend>
@@ -284,6 +356,7 @@ package_name = '{package_name}'
 setup(
     name=package_name,
     version='0.0.0',
+    packages=[],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -639,14 +712,38 @@ def generate_launch_description():
 
 if __name__ == '__main__':
     # Parse command line arguments
-    parser = argparse.ArgumentParser(description='Convert a ROS1 package to ROS2 format')
-    parser.add_argument('--ros1-path', type=str, default='example/bp001/ros1/bp001_description')
-    parser.add_argument('--ros2-path', type=str, default='example/bp001/ros2/bp001_description')
-    
+    parser = argparse.ArgumentParser(
+        description='Convert one ROS1 package, or a directory of ROS1 packages, to ROS2 format'
+    )
+    parser.add_argument(
+        '--ros1-path',
+        type=str,
+        default=None,
+        help='ROS1 package path, or a directory containing multiple ROS1 package directories'
+    )
+    parser.add_argument(
+        '--ros2-path',
+        type=str,
+        default=None,
+        help='ROS2 output package path for single conversion, or ROS2 output root for batch conversion'
+    )
+
     args = parser.parse_args()
-    
+
+    if args.ros1_path is None:
+        args.ros1_path = 'example/bp001/ros1/bp001_description'
+
+    if args.ros2_path is None:
+        if args.ros1_path == 'example/bp001/ros1/bp001_description':
+            args.ros2_path = 'example/bp001/ros2/bp001_description'
+        else:
+            args.ros2_path = infer_ros2_path(args.ros1_path)
+
     # Perform the conversion
-    convert_ros1_to_ros2(args.ros1_path, args.ros2_path)
-    
+    converted_paths = convert_ros1_path(args.ros1_path, args.ros2_path)
+
     print(f"\nROS1 to ROS2 conversion complete!")
-    print(f"Converted package is located at: {args.ros2_path}")
+    if len(converted_paths) == 1:
+        print(f"Converted package is located at: {converted_paths[0]}")
+    else:
+        print(f"Converted {len(converted_paths)} package(s) into: {args.ros2_path}")
